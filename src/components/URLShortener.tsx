@@ -1,4 +1,3 @@
-// src/components/URLShortener.tsx
 import React, { useState } from "react";
 import { firestore, collection, addDoc } from "../firebase";
 import "../styles/styles.css";
