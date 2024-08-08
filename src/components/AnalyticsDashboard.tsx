@@ -1,66 +1,57 @@
-import React, { useState, useEffect } from "react";
-import { db, collection, getDocs } from "../firebase"; // Ensure correct path
+import React, { useEffect, useState } from "react";
+import { db, collection, getDocs } from "../firebase";
 import "../styles/styles.css";
 
-interface UrlData {
-  id: string;
-  longURL: string;
-  shortURL?: string; // Optional short URL property
-}
-
 const AnalyticsDashboard: React.FC = () => {
-  const [urls, setUrls] = useState<UrlData[]>([]);
+  const [urls, setUrls] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const fetchAnalytics = async () => {
+    const fetchUrls = async () => {
       try {
-        const snapshot = await getDocs(collection(db, "urls"));
-        const data: UrlData[] = snapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...(doc.data() as Omit<UrlData, "id">),
-        }));
-        setUrls(data);
+        const querySnapshot = await getDocs(collection(db, "urls"));
+        const urlsData = querySnapshot.docs.map((doc) => doc.data());
+        setUrls(urlsData);
+        setLoading(false);
       } catch (error) {
-        console.error("Error fetching documents: ", error);
+        console.error("Error fetching URLs: ", error);
+        setError("Failed to load data");
+        setLoading(false);
       }
     };
 
-    fetchAnalytics();
+    fetchUrls();
   }, []);
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>{error}</p>;
 
   return (
     <div className="AnalyticsDashboard">
-      <h1>Analytics Dashboard</h1>
+      <h2>Analytics Dashboard</h2>
       <table className="Analytics-table">
         <thead>
           <tr>
-            <th>ID</th>
-            <th>Long URL</th>
             <th>Short URL</th>
+            <th>Long URL</th>
+            <th>Click Count</th>
           </tr>
         </thead>
         <tbody>
-          {urls.map((url) => (
-            <tr key={url.id}>
-              <td>{url.id}</td>
+          {urls.map((url, index) => (
+            <tr key={index}>
+              <td>
+                <a href={url.longURL} target="_blank" rel="noopener noreferrer">
+                  {url.shortURL}
+                </a>
+              </td>
               <td>
                 <a href={url.longURL} target="_blank" rel="noopener noreferrer">
                   {url.longURL}
                 </a>
               </td>
-              <td>
-                {url.shortURL ? (
-                  <a
-                    href={url.longURL}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {url.shortURL}
-                  </a>
-                ) : (
-                  "N/A"
-                )}
-              </td>
+              <td>{url.clickCount || 0}</td>
             </tr>
           ))}
         </tbody>

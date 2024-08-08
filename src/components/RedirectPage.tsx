@@ -1,37 +1,51 @@
 import React, { useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { db, doc, getDoc } from "../firebase"; // Ensure correct path
-import "../styles/styles.css";
+import { db, doc, updateDoc, increment, getDoc } from "../firebase";
+import { useParams, useNavigate } from "react-router-dom";
 
 const RedirectPage: React.FC = () => {
-  const { id } = useParams<{ id: string }>();
+  const { shortURL } = useParams<{ shortURL: string }>();
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchAndRedirect = async () => {
+    const handleRedirect = async () => {
+      if (!shortURL) {
+        console.error("No short URL provided!");
+        navigate("/404"); // Redirect to 404 if shortURL is undefined
+        return;
+      }
+
       try {
-        console.log("Fetching document for ID:", id); // Log the ID
-        const docRef = doc(db, "urls", id || "");
+        const docRef = doc(db, "urls", shortURL);
         const docSnap = await getDoc(docRef);
 
         if (docSnap.exists()) {
-          const longURL = docSnap.data().longURL;
-          console.log("Document found, redirecting to:", longURL);
-          window.location.href = longURL;
+          const longURL = docSnap.data()?.longURL;
+
+          if (longURL) {
+            console.log(`Updating click count for short URL: ${shortURL}`);
+            await updateDoc(docRef, {
+              clickCount: increment(1),
+            });
+            console.log(`Redirecting to: ${longURL}`);
+            window.location.href = longURL; // Redirect to the long URL
+          } else {
+            console.error("Long URL not found!");
+            navigate("/404"); // Redirect to 404 if longURL is undefined
+          }
         } else {
-          console.log("Document not found, redirecting to 404");
-          navigate("/404"); // Handle URL not found
+          console.error("No such document!");
+          navigate("/404"); // Redirect to 404 if document does not exist
         }
       } catch (error) {
         console.error("Error fetching document:", error);
-        navigate("/404"); // Handle errors
+        navigate("/404"); // Redirect to 404 on error
       }
     };
 
-    fetchAndRedirect();
-  }, [id, navigate]);
+    handleRedirect();
+  }, [shortURL, navigate]);
 
-  return null; // This component does not render anything
+  return null; // No need to render anything
 };
 
 export default RedirectPage;

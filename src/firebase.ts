@@ -6,6 +6,8 @@ import {
   getDocs,
   doc,
   getDoc,
+  updateDoc,
+  increment, // Importing updateDoc and increment
 } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 import { getAnalytics } from "firebase/analytics";
@@ -34,4 +36,15 @@ const auth = getAuth(app);
 const analytics = getAnalytics(app);
 
 // Export Firebase functionalities
-export { db, auth, analytics, collection, addDoc, getDocs, doc, getDoc };
+export {
+  db,
+  auth,
+  analytics,
+  collection,
+  addDoc,
+  getDocs,
+  doc,
+  getDoc,
+  updateDoc,
+  increment,
+};

@@ -15,7 +15,7 @@ function App() {
         <main className="App-main">
           <Routes>
             <Route path="/" element={<URLShortener />} />
-            <Route path="/short/:id" element={<RedirectPage />} />
+            <Route path="/short/:shortURL" element={<RedirectPage />} />
             <Route path="/analytics" element={<AnalyticsDashboard />} />
             <Route path="/404" element={<h2>404 - Page Not Found</h2>} />
           </Routes>
