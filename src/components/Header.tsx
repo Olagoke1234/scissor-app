@@ -11,9 +11,9 @@ const Header: React.FC = () => {
           <li>
             <Link to="/">Home</Link>
           </li>
-          <li>
+          {/* <li>
             <Link to="/qr-code">QR Code Generator</Link>
-          </li>
+          </li> */}
           <li>
             <Link to="/analytics">Analytics Dashboard</Link>
           </li>

@@ -1,27 +1,27 @@
 import React, { useState, useEffect } from "react";
-import { firestore, collection, getDocs } from "../firebase";
+import { db, collection, getDocs } from "../firebase"; // Ensure correct path
 import "../styles/styles.css";
 
 interface UrlData {
   id: string;
   longURL: string;
-  clicks: number;
+  shortURL?: string; // Optional short URL property
 }
 
 const AnalyticsDashboard: React.FC = () => {
-  const [urlData, setUrlData] = useState<UrlData[]>([]);
+  const [urls, setUrls] = useState<UrlData[]>([]);
 
   useEffect(() => {
     const fetchAnalytics = async () => {
       try {
-        const snapshot = await getDocs(collection(firestore, "urls"));
+        const snapshot = await getDocs(collection(db, "urls"));
         const data: UrlData[] = snapshot.docs.map((doc) => ({
           id: doc.id,
           ...(doc.data() as Omit<UrlData, "id">),
         }));
-        setUrlData(data);
+        setUrls(data);
       } catch (error) {
-        console.error("Error fetching analytics:", error);
+        console.error("Error fetching documents: ", error);
       }
     };
 
@@ -30,29 +30,37 @@ const AnalyticsDashboard: React.FC = () => {
 
   return (
     <div className="AnalyticsDashboard">
-      <h2>Analytics Dashboard</h2>
+      <h1>Analytics Dashboard</h1>
       <table className="Analytics-table">
         <thead>
           <tr>
+            <th>ID</th>
+            <th>Long URL</th>
             <th>Short URL</th>
-            <th>Original URL</th>
-            <th>Clicks</th>
           </tr>
         </thead>
         <tbody>
-          {urlData.map((data) => (
-            <tr key={data.id}>
+          {urls.map((url) => (
+            <tr key={url.id}>
+              <td>{url.id}</td>
               <td>
-                <a
-                  href={`${window.location.origin}/short/${data.id}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {`${window.location.origin}/short/${data.id}`}
+                <a href={url.longURL} target="_blank" rel="noopener noreferrer">
+                  {url.longURL}
                 </a>
               </td>
-              <td>{data.longURL}</td>
-              <td>{data.clicks || 0}</td>
+              <td>
+                {url.shortURL ? (
+                  <a
+                    href={url.longURL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {url.shortURL}
+                  </a>
+                ) : (
+                  "N/A"
+                )}
+              </td>
             </tr>
           ))}
         </tbody>

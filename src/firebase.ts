@@ -1,9 +1,16 @@
-// src/firebase.ts
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, addDoc, getDocs } from "firebase/firestore";
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  getDocs,
+  doc,
+  getDoc,
+} from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 import { getAnalytics } from "firebase/analytics";
 
+// Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyCuev71Am1uRMciZ0XDWZqEQxp0PMN7pzE",
   authDomain: "scissor-b5939.firebaseapp.com",
@@ -13,9 +20,18 @@ const firebaseConfig = {
   appId: "1:30489714444:web:c3e08fd082e6a954137329",
   measurementId: "G-XR2MXJ1BCW",
 };
+
+// Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const firestore = getFirestore(app);
+
+// Initialize Firestore
+const db = getFirestore(app);
+
+// Initialize Authentication
 const auth = getAuth(app);
+
+// Initialize Analytics
 const analytics = getAnalytics(app);
 
-export { firestore, auth, analytics, collection, addDoc, getDocs };
+// Export Firebase functionalities
+export { db, auth, analytics, collection, addDoc, getDocs, doc, getDoc };

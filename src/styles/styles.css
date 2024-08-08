@@ -1,5 +1,4 @@
-/* src/styles/styles.css */
-
+/* Base styles */
 html,
 body {
   margin: 0;
@@ -10,7 +9,7 @@ body {
 
 .App {
   text-align: center;
-  height: 100vh; /* Full viewport height */
+  height: 100vh;
   display: flex;
   flex-direction: column;
 }
@@ -23,32 +22,43 @@ body {
 
 .App-header h1 {
   margin: 0;
+  color: #0099cc;
+}
+
+nav ul,
+nav li {
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
 }
 
 nav ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+  width: 100%;
+  text-align: left;
 }
 
 nav li {
-  display: inline;
-  margin: 0 10px;
+  display: inline-block;
+  position: relative;
 }
 
 nav a {
-  color: white;
+  display: block;
+  line-height: 45px;
+  padding: 0 14px;
   text-decoration: none;
-  font-size: 18px;
+  color: #ffffff;
+  font-size: 16px;
 }
 
 nav a:hover {
-  text-decoration: underline;
+  color: #0099cc;
+  background: #f2f2f2;
 }
 
 .App-main {
   padding: 20px;
-  flex: 1; /* Ensures this section grows to fill available space */
+  flex: 1;
   background-color: #f5f5f5;
   display: flex;
   flex-direction: column;
@@ -60,7 +70,7 @@ nav a:hover {
   color: white;
 }
 
-/* Specific component styles */
+/* Analytics Dashboard */
 .AnalyticsDashboard {
   padding: 20px;
 }
@@ -68,23 +78,46 @@ nav a:hover {
 .Analytics-table {
   width: 100%;
   border-collapse: collapse;
+  margin-top: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #f9f9f9;
 }
 
 .Analytics-table th,
 .Analytics-table td {
-  border: 1px solid #ddd;
-  padding: 8px;
+  border: 2px solid #ddd;
+  padding: 12px 15px;
 }
 
 .Analytics-table th {
-  background-color: #f4f4f4;
+  background-color: #4caf50;
+  color: white;
   text-align: left;
 }
 
+.Analytics-table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.Analytics-table tr:hover {
+  background-color: #ddd;
+}
+
+.Analytics-table a {
+  color: #4caf50;
+  text-decoration: none;
+}
+
+.Analytics-table a:hover {
+  text-decoration: underline;
+}
+
+/* QR Code Generator */
 .QRCodeGenerator {
   padding: 20px;
 }
 
+/* URL Shortener */
 .URLShortener {
   padding: 20px;
 }
