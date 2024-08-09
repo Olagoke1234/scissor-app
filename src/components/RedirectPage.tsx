@@ -10,7 +10,7 @@ const RedirectPage: React.FC = () => {
     const handleRedirect = async () => {
       if (!shortURL) {
         console.error("No short URL provided!");
-        navigate("/404"); // Redirect to 404 if shortURL is undefined
+        navigate("/404");
         return;
       }
 
@@ -27,25 +27,25 @@ const RedirectPage: React.FC = () => {
               clickCount: increment(1),
             });
             console.log(`Redirecting to: ${longURL}`);
-            window.location.href = longURL; // Redirect to the long URL
+            window.location.href = longURL;
           } else {
             console.error("Long URL not found!");
-            navigate("/404"); // Redirect to 404 if longURL is undefined
+            navigate("/404");
           }
         } else {
           console.error("No such document!");
-          navigate("/404"); // Redirect to 404 if document does not exist
+          navigate("/404");
         }
       } catch (error) {
         console.error("Error fetching document:", error);
-        navigate("/404"); // Redirect to 404 on error
+        navigate("/404");
       }
     };
 
     handleRedirect();
   }, [shortURL, navigate]);
 
-  return null; // No need to render anything
+  return null;
 };
 
 export default RedirectPage;
