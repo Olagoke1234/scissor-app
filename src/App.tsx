@@ -13,10 +13,13 @@ import LandingPage from "./components/LandingPage";
 import URLShortener from "./components/URLShortener";
 import RedirectPage from "./components/RedirectPage";
 import AnalyticsDashboard from "./components/AnalyticsDashboard";
+import SignInEmail from "./components/SignInEmail";
+import CompleteSignIn from "./components/CompleteSignIn";
 
 const App = () => {
   const location = useLocation();
-  const showHeaderFooter = location.pathname !== "/";
+  const showHeaderFooter =
+    location.pathname !== "/" && location.pathname !== "/completeSignIn";
 
   return (
     <div className="App">
@@ -27,6 +30,8 @@ const App = () => {
           <Route path="/shortener" element={<URLShortener />} />
           <Route path="/short/:shortURL" element={<RedirectPage />} />
           <Route path="/analytics" element={<AnalyticsDashboard />} />
+          <Route path="/signIn" element={<SignInEmail />} />
+          <Route path="/completeSignIn" element={<CompleteSignIn />} />
           <Route path="/404" element={<h2>404 - Page Not Found</h2>} />
         </Routes>
       </main>
