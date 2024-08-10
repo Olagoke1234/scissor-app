@@ -1,3 +1,4 @@
+// src/firebase.ts
 import { initializeApp } from "firebase/app";
 import {
   getFirestore,
@@ -7,9 +8,16 @@ import {
   doc,
   getDoc,
   updateDoc,
-  increment, // Importing updateDoc and increment
+  increment,
 } from "firebase/firestore";
-import { getAuth } from "firebase/auth";
+import {
+  getAuth,
+  GoogleAuthProvider,
+  signInWithPopup,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
+} from "firebase/auth";
 import { getAnalytics } from "firebase/analytics";
 
 // Your web app's Firebase configuration
@@ -31,15 +39,19 @@ const db = getFirestore(app);
 
 // Initialize Authentication
 const auth = getAuth(app);
+const googleProvider = new GoogleAuthProvider();
 
 // Initialize Analytics
 const analytics = getAnalytics(app);
 
-// Export Firebase functionalities
 export {
   db,
   auth,
-  analytics,
+  googleProvider,
+  signInWithPopup,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
   collection,
   addDoc,
   getDocs,

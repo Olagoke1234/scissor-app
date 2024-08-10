@@ -7,6 +7,81 @@ body {
   font-family: Arial, sans-serif;
 }
 
+/* LandingPage css */
+
+/* src/styles/styles.css */
+
+.landing-page {
+  height: 100%;
+  width: 100%;
+  overflow: hidden; /* Prevents overflow in both x and y axes */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url("../styles/background-image2.jpg"); /* Replace with your background image path */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.content {
+  text-align: center;
+  padding: 20px;
+  background-color: rgba(
+    0,
+    0,
+    0,
+    0.5
+  ); /* Adds a semi-transparent background to content */
+  border-radius: 10px;
+  color: white;
+}
+
+.auth-form {
+  margin-top: 20px;
+}
+
+.auth-input {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.auth-button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.auth-button.google-signin {
+  background-color: #db4437;
+}
+
+.error-message {
+  color: red;
+  font-size: 0.9rem;
+}
+
+.toggle-message {
+  margin-top: 10px;
+  color: #ddd;
+  cursor: pointer;
+}
+
+.toggle-message span {
+  color: #007bff;
+  text-decoration: underline;
+}
+
 .App {
   text-align: center;
   height: 100vh;
@@ -14,35 +89,49 @@ body {
   flex-direction: column;
 }
 
-.App-header {
+/* src/styles/styles.css */
+
+/* src/styles/styles.css */
+
+.header {
+  display: flex;
+  flex-direction: column; /* Stack elements vertically */
+  align-items: center;
+  padding: 10px 20px;
+  border-bottom: 1px solid #e0e0e0;
   background-color: #282c34;
-  padding: 20px;
   color: white;
 }
 
-.App-header h1 {
+.header-content {
+  width: 100%;
+  /* max-width: 1200px; */
+  display: flex;
+  flex-direction: column; /* Stack elements vertically */
+  align-items: center;
+}
+
+h1 {
   margin: 0;
+  font-size: 2rem; /* Adjust font size as needed */
+  text-align: center; /* Center the heading text */
   color: #0099cc;
 }
 
-nav ul,
-nav li {
-  margin: 0 auto;
-  padding: 0;
-  list-style: none;
-}
-
-nav ul {
+.nav-container {
+  display: flex;
+  justify-content: space-between;
   width: 100%;
-  text-align: left;
+  margin-top: 10px; /* Space between heading and navigation */
 }
 
-nav li {
-  display: inline-block;
-  position: relative;
+.left-section {
+  display: flex;
+  gap: 20px; /* Space between the links */
 }
 
-nav a {
+.home-button,
+.analytics-button {
   display: block;
   line-height: 45px;
   padding: 0 14px;
@@ -51,9 +140,34 @@ nav a {
   font-size: 16px;
 }
 
-nav a:hover {
+.home-button:hover,
+.analytics-button:hover {
   color: #0099cc;
   background: #f2f2f2;
+}
+
+.right-section {
+  display: flex;
+  align-items: center;
+}
+
+.sign-out-button {
+  background-color: #dc3545; /* Adjust the color as needed */
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.sign-out-button:hover {
+  background-color: #c82333; /* Adjust the color as needed */
+}
+
+.auth-link {
+  text-decoration: none;
+  color: #007bff; /* Adjust the color as needed */
+  font-weight: bold;
 }
 
 .App-main {
