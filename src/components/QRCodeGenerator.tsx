@@ -21,10 +21,14 @@ const QRCodeGenerator: React.FC<Props> = ({ url }) => {
   return (
     <div className="QRCodeGenerator">
       <h2>Generated QR Code</h2>
+      <br />
+      <br />
       <div className="qr-code">
         {url ? (
           <>
             <QRCode id="qrcode" value={url} size={200} />
+            <br />
+            <br />
             <button onClick={handleDownload} className="URL-button">
               Download QR Code
             </button>

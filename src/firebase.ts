@@ -59,4 +59,5 @@ export {
   getDoc,
   updateDoc,
   increment,
+  analytics,
 };
