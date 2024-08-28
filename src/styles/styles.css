@@ -219,13 +219,60 @@ h1 {
   background-color: #ddd;
 }
 
-.Analytics-table a {
-  color: #46baf4;
-  text-decoration: none;
+/* Styles for URLs in the Analytics table */
+.Analytics-table td a {
+  display: block;
+  max-width: 400px; /* Set the maximum width for the URL */
+  white-space: nowrap; /* Prevent the text from wrapping */
+  overflow: hidden; /* Hide overflowed text */
+  text-overflow: ellipsis; /* Add ellipsis (...) for overflowing text */
 }
 
+.Analytics-table td a:hover {
+  overflow: visible;
+  text-overflow: initial;
+}
+
+/* Hover effect for links */
 .Analytics-table a:hover {
   text-decoration: underline;
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 600px) {
+  .AnalyticsDashboard {
+    padding: 10px;
+  }
+
+  .Analytics-table th,
+  .Analytics-table td {
+    padding: 8px 10px;
+  }
+
+  .Analytics-table td a {
+    max-width: 150px; /* Adjust width for screens up to 600px */
+  }
+}
+
+/* Further adjustments for very small screens (e.g., 376px) */
+@media (max-width: 376px) {
+  .AnalyticsDashboard {
+    padding: 5px;
+  }
+
+  .Analytics-table {
+    font-size: 0.75rem; /* Reduced font size */
+    margin-top: 10px;
+  }
+
+  .Analytics-table th,
+  .Analytics-table td {
+    padding: 6px 8px; /* Smaller padding for a more compact table */
+  }
+
+  .Analytics-table td a {
+    max-width: 100px; /* Adjust width for screens up to 376px */
+  }
 }
 
 /* QR Code Generator */
